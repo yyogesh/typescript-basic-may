@@ -40,3 +40,33 @@ function printToFile(text: string, callback: () => void): void {
 }
 
 console.log(printToFile('test', () => console.log('done')));
+
+
+const arr = [1, 2, 3, 4]
+arr.map(item => item * 2); //[2, 4, 6, 8]
+
+function arrayMutate(numbers: number[]): number[] {
+    return numbers.map(item => item * 2);
+}
+
+function arrayMutate1(numbers: number[], mutate: (v: number) => number): number[] {
+    return numbers.map(mutate);
+}
+
+console.log(arrayMutate1([1, 2, 3], (v) => v * 2));
+
+
+type MutateFunction = (v: number) => number;
+
+function arrayMutate2(numbers: number[], mutate: MutateFunction): number[] {
+    return numbers.map(mutate);
+}
+
+const myNewMutateFunction: MutateFunction = (v: number) => v * 100;
+
+
+function createAdder(num: number): (val: number) => number {
+    return (val: number) => val + num;
+}
+
+createAdder(10)(20);
